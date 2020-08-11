@@ -29,8 +29,8 @@ const SortSettings = ({
   const collapseButton = createRef();
   useEffect(() => {
     if (timeline !== null && !isSorted) {
-      // eslint-disable-next-line
       updtProcessingStatus();
+
       const delay = speed / timeline.length;
       for (let i = 0; i < timeline.length; i++) {
         setTimeout(() => {
@@ -46,7 +46,14 @@ const SortSettings = ({
         }, delay * i);
       }
     }
-  }, [timeline, visualiseSortHelper, colorTimeline, updtProcessingStatus]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    timeline,
+    visualiseSortHelper,
+    colorTimeline,
+    updtProcessingStatus,
+    isSorted,
+  ]);
   return (
     <div className="sv-header" style={{ color: "white" }}>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
