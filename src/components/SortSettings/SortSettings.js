@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, createRef } from "react";
 import { connect } from "react-redux";
 
 import {
@@ -26,6 +26,7 @@ const SortSettings = ({
   updateArraySize,
   updtProcessingStatus,
 }) => {
+  const collapseButton = createRef();
   useEffect(() => {
     if (timeline !== null && !isSorted) {
       // eslint-disable-next-line
@@ -58,6 +59,7 @@ const SortSettings = ({
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
           aria-label="Toggle navigation"
+          ref={collapseButton}
         >
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -109,7 +111,7 @@ const SortSettings = ({
                 {technique === null ? "Select Technique" : technique}
               </div>
               <div
-                className="dropdown-menu"
+                className="pt-0 pb-0 dropdown-menu"
                 aria-labelledby="navbarDropdown"
                 onClick={(event) => {
                   if (!processing) {
@@ -142,8 +144,10 @@ const SortSettings = ({
                 className="ml-1 btn btn-success"
                 onClick={(event) => {
                   event.preventDefault();
-                  visualiseSort(technique, board);
-                  if (isSorted) {
+                  if (!isSorted) {
+                    visualiseSort(technique, board);
+                    collapseButton.current.click();
+                  } else {
                     window.alert("Array is already sorted. Shuffle to reset!");
                   }
                 }}
