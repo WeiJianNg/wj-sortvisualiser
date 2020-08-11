@@ -30,7 +30,6 @@ const SortSettings = ({
   useEffect(() => {
     if (timeline !== null && !isSorted) {
       updtProcessingStatus();
-
       const delay = speed / timeline.length;
       for (let i = 0; i < timeline.length; i++) {
         setTimeout(() => {
@@ -47,13 +46,7 @@ const SortSettings = ({
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    timeline,
-    visualiseSortHelper,
-    colorTimeline,
-    updtProcessingStatus,
-    isSorted,
-  ]);
+  }, [timeline, visualiseSortHelper, colorTimeline, updtProcessingStatus]);
   return (
     <div className="sv-header" style={{ color: "white" }}>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
